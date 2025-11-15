@@ -62,7 +62,7 @@ do {
                 1 - Consultar saldo atual
                 2 - Realizar depósitos
                 3 - Efetuar saques
-                4 - Fazer transferência
+                4 - Fazer transferências
                 5 - Visualizar extrato
                 0 - Sair 
             `);
