@@ -1,9 +1,8 @@
 const prompt = require('prompt-sync')();
+const { verificarLogin } = require("./VerificaçãoLogin/VerificarLogin");
 
-let usuario;
-let senha;
-let validaCpf = false;
 let menu;
+let login = true;
 
 do {
     console.log(`
@@ -11,19 +10,12 @@ do {
         |   BANCO SOLARIS   |
         =====================
     `);
-    do {
-        usuario = prompt("Digite o CPF (apenas números): ");
-        if (isNaN(usuario) && usuario.length < 12 ) {
-            console.log("CPF inválido. É necessário ter 11 dígitos numéricos.")
-        } else {
-            validaCpf = true;
-        }
-    } while(!validaCpf);
-
-    senha = prompt("Digite a senha: ");
+    let usuario   = prompt("Login: " );
+    let senha     = prompt("Senha: ");
+    let validacao = verificarLogin(usuario, senha); //trocar pela função de verificação de login que será importada
 
     //verificação da senha
-    if (senha ==='adm123') {
+    if (validacao === 1) {
         //mostra menu gerente
         do {
             console.log(`
@@ -48,13 +40,15 @@ do {
                     break;
                 case "0":
                     console.log("Saindo do Sistema. Volte Sempre!");
+                    login = false
                     break;
                 default:
                     console.log("Opção Inválida. Tente novamente!");
                     break;
             }
         } while (menu!=="0"); //deixei assim para que retorne para o menu até acertar a opção ou digita 0 pra sair
-    } else {
+    }
+    else if(validacao === 2) {
         //mostra menu clientes
         do {
             console.log(`
@@ -87,6 +81,7 @@ do {
                     break;
                 case "0":
                     console.log("Saindo do Sistema. Volte Sempre!");
+                    login = false
                     break;
                 default:
                     console.log("Opção Inválida. Tente novamente!");
@@ -94,7 +89,10 @@ do {
             }
         } while (menu!=="0"); //deixei assim para que retorne para o menu até acertar a opção ou digita 0 pra sair
     }
-} while (console.log("parei aqui"))
+    else {
+        (console.log("Usuário inválido!"))
+    };
+} while (login === true)
 
 
  
