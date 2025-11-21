@@ -1,5 +1,6 @@
-/* Estou fazendo o Menu principal apenas para teste ao rodar o codigo.
-Assim que definirmos a versão final do Menu posso adaptar o codigo */
+/* Código temporario com valores definidos na variavel apenas para teste do MENU
+Quando o codigo estiver completo sera atualizado e adaptado para puxar os dados 
+do prompt do Gerente e dos arquivos JSON */
 
 const prompt = require('prompt-sync')({sigint: true});
 let clientes = [];
@@ -90,9 +91,9 @@ function buscarClientePorCPF(cpf) {
         let saldoInicial = '1000'
         saldoInicial = parseFloat(saldoInicial);
 
-        /*definindo variaveis diretamente para teste do codigo pois não foi 
-        feito codigo prompt para inserir dados pelo gerente, este codigo
-        será removido quando for integrado */
+        /* Definição das variaveis temporariamente para teste do codigo
+        na versão definitiva as variaveis serão buscadas pelos dados inseridos pelo
+        gerente*/
         const cliente = {
             nome: nome,
             cpf: cpf,
@@ -167,6 +168,7 @@ function menuCliente() {
 
 
 function deposito(cliente) {
+
     const valor = parseFloat(prompt('Valor do depósito: '));
     if (valor > 0) {
         cliente.saldo = cliente.saldo + valor;
@@ -177,5 +179,39 @@ function deposito(cliente) {
     }
 }
 
-/* Continua....  */
+function saque(cliente) {
+    const valor = parseFloat(prompt('Valor do saque: '));
+    //Verificar se tem saldo acima de zero, se tiver debita e registra no extrato.
+    if (valor > 0 && valor <= cliente.saldo) {
+        cliente.saldo = cliente.saldo - valor;
+        cliente.extrato.push(`Saque de R$${valor.toFixed(2)}`);
+        console.log('Saque realizado com sucesso!');
+    } else if (valor > cliente.saldo) {
+        console.log(`Saldo insuficiente para saque.`);
+    } else {
+        console.log('Valor inválido.');
+    }
+}
+
+function transferencia(cliente) {
+    console.log('Em desenvolvimento pela Adriana')
+    
+}
+
+function verExtrato(cliente) {
+console.log('\n   EXTRATO   ');
+//esse codigo vai analisar o array se tem registro no transação
+if (cliente.extrato.length === 0) {
+    console.log('Não ha transações na sua conta.'); //se tiver o forEach busca as transações
+} else {
+    cliente.extrato.forEach((transacao, index) => {
+        console.log(`${index + 1}. ${transacao}`);
+    });
+}
+console.log(`Saldo atual: R$${cliente.saldo.toFixed(2)}`); //saldo atualizado
+console.log('               ');
+
+}
+
+
 main();
