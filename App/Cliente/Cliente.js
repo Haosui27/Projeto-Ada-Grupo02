@@ -4,16 +4,17 @@ class Cliente {
   #saldo;
   #password;
   #transacoes;
-  #senhaPadrao = "1234"
+  #senhaPadrao = "1234";
 
-  constructor(cpf, nome, saldo) {
+  constructor(cpf, nome, saldo, password = null, transacoes = []) {
     this.#cpf = cpf;
     this.#nome = nome;
     this.#saldo = saldo;
-    this.#password = this.#senhaPadrao;
-    this.#transacoes = [];
+    this.#password = password ?? this.#senhaPadrao;
+    this.#transacoes = transacoes;
   }
 
+  // Método para gravar objetos no arquivo JSON
   toJSON() {
     return {
       cpf: this.#cpf,
@@ -24,6 +25,12 @@ class Cliente {
     };
   }
 
+  // Método para construir instanciar objetos a partir do JSON
+  static fromJSON(obj) {
+    return new Cliente(obj.cpf, obj.nome, obj.saldo, obj.password, obj.transacoes);
+  }
+
+  // Método pra registro de transações
   registrarTransacao(tipo, valor, destino = null) {
     this.#transacoes.push({
       tipo,
@@ -33,10 +40,26 @@ class Cliente {
     });
   }
 
+  getCpf(){
+    return this.#cpf;
+  }
+
+  getNome(){
+    return this.#nome;
+  }
+
+  getPassword(){
+    return this.#password;
+  }
+
+  // Método para atribuir nova senha
   setSenhaNova(senha) {
     this.#password = senha;
   }
 
+  isPrimeiroAcesso(){
+    return this.#password === null || this.#password === this.#senhaPadrao;
+  }
 }
 
 module.exports = { Cliente };

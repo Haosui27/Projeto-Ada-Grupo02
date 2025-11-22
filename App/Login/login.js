@@ -1,98 +1,40 @@
-const prompt = require('prompt-sync')();
-const { verificarLogin } = require("./VerificaçãoLogin/VerificarLogin");
+const prompt = require("prompt-sync")();
+const { verificarLogin } = require("./VerificarLogin");
+const { menuGerente } = require("../Gerente/menuGerente");
+const { menuCliente } = require("../Cliente/menuCliente");
 
-let menu;
-let login = true;
-
-do {
+async function tela() {
+  while (true) {
     console.log(`
         =====================
         |   BANCO SOLARIS   |
         =====================
     `);
-    let usuario   = prompt("Login: " );
-    let senha     = prompt("Senha: ");
-    let validacao = verificarLogin(usuario, senha); //trocar pela função de verificação de login que será importada
 
-    //verificação da senha
-    if (validacao === 1) {
-        //mostra menu gerente
-        do {
-            console.log(`
-                ===== MENU GERENTE =====
-                1 - Cadastrar clientes
-                2 - Listar clientes 
-                3 - Detalhar clientes
-                0 - Sair 
-            `);
+    const usuario = prompt("Login: ");
+    const senha = prompt("Senha: ");
+    const validacao = await verificarLogin(usuario, senha);
 
-            menu = prompt("Digite a opção desejada: ");
-            
-            switch(menu) {
-                case "1":
-                    console.log("Em manutenção. Cadastrar clientes");
-                    break;
-                case "2":
-                    console.log("Em manutenção. Listar clientes");
-                    break;
-                case "3":
-                    console.log("Em manutenção.Detalhar clientes");
-                    break;
-                case "0":
-                    console.log("Saindo do Sistema. Volte Sempre!");
-                    login = false
-                    break;
-                default:
-                    console.log("Opção Inválida. Tente novamente!");
-                    break;
-            }
-        } while (menu!=="0"); //deixei assim para que retorne para o menu até acertar a opção ou digita 0 pra sair
+    switch (validacao) {
+      case 1:
+        // Mostra menu gerente
+        menuGerente();
+        break; // sai do loop
+      case 2:
+        // Mostra menu cliente
+        menuCliente();
+        break; // sai do loop
+      case 3:
+        // Primeiro acesso concluído -> apenas continue sem mensagem de erro
+        continue;
+      default:
+        console.log("Usuário inválido! Tente novamente.\n");
+        continue; // volta para pedir login de novo
     }
-    else if(validacao === 2) {
-        //mostra menu clientes
-        do {
-            console.log(`
-                ===== MENU CLIENTES =====
-                1 - Consultar saldo atual
-                2 - Realizar depósitos
-                3 - Efetuar saques
-                4 - Fazer transferências
-                5 - Visualizar extrato
-                0 - Sair 
-            `);
 
-            menu = prompt("Digite a opção desejada: ");
-            
-            switch(menu) {
-                case "1":
-                    console.log("Em manutenção. Consultar saldo atual");
-                    break;
-                case "2":
-                    console.log("Em manutenção. Realizar depósitos");
-                    break;
-                case "3":
-                    console.log("Em manutenção. Efetuar saques");
-                    break;
-                case "4":
-                    console.log("Em manutenção. Fazer transferência");
-                    break;
-                case "5":
-                    console.log("Em manutenção. Visualizar extrato");
-                    break;
-                case "0":
-                    console.log("Saindo do Sistema. Volte Sempre!");
-                    login = false
-                    break;
-                default:
-                    console.log("Opção Inválida. Tente novamente!");
-                    break;
-            }
-        } while (menu!=="0"); //deixei assim para que retorne para o menu até acertar a opção ou digita 0 pra sair
-    }
-    else {
-        (console.log("Usuário inválido!"))
-    };
-} while (login === true)
+    // Se chegou aqui, login foi válido → encerra loop
+    break;
+  }
+}
 
-
- 
+module.exports = { tela };

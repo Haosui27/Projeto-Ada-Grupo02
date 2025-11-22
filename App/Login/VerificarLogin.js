@@ -7,32 +7,27 @@ const arquivoGerente = path.resolve(
   __dirname,
   "../../ArquivosJSON/gerentes.json"
 );
-const { arquivoCliente } = require("../Arquivos/arquivoCliente");
+const { arquivoCliente } = require("../Cliente/arquivoCliente");
 
-// Função para carregar JSON
+// Função para carregar JSON genérico
 function carregarJSON(caminho) {
   const dados = fs.readFileSync(caminho, "utf8");
   return JSON.parse(dados);
 }
 
-function carregarClientes(arquivoCliente) {
-  const dados = fs.readFileSync(arquivoCliente, "utf8");
+// Função para carregar clientes como instâncias da classe
+function carregarClientes(caminho) {
+  const dados = fs.readFileSync(caminho, "utf8");
   const clientesJSON = JSON.parse(dados);
 
-  // Converte cada objeto em instância da classe Cliente
-  return clientesJSON.map(c => {
-    const cliente = new Cliente(c.cpf, c.nome, c.saldo);
-    cliente.setSenhaNova(c.password); // mantém a senha já existente
-    return cliente;
-  });
+  // Usa o método estático fromJSON da classe
+  return clientesJSON.map((c) => Cliente.fromJSON(c));
 }
 
 async function verificarLogin(usuario, senha) {
-  if (String(usuario).length === 3) {
-    return await verificaSeGerente(usuario, senha);
-  } else {
-    return await verificaSeCliente(usuario, senha);
-  }
+  return usuario.length === 3
+    ? await verificaSeGerente(usuario, senha)
+    : await verificaSeCliente(usuario, senha);
 }
 
 async function verificaSeGerente(usuario, senha) {
@@ -50,9 +45,8 @@ async function verificaSeGerente(usuario, senha) {
 }
 
 async function verificaSeCliente(usuario, senha) {
-  
   const clientes = carregarClientes(arquivoCliente);
-  const cliente = clientes.find(c => c.toJSON().cpf === usuario);
+  const cliente = clientes.find((c) => c.getCpf() === usuario); // usa método de acesso ou toJSON
 
   if (!cliente) {
     console.log("Cliente não encontrado!");
@@ -60,27 +54,36 @@ async function verificaSeCliente(usuario, senha) {
   }
 
   // Primeiro acesso → senha padrão ou null
-  if (cliente.toJSON().password === "1234" || cliente.toJSON().password === null) {
+  if (cliente.isPrimeiroAcesso()) {
+    // usa método da classe
     await primeiroAcesso(cliente, clientes);
-    return 0;
+    return 3;
   }
 
   // Senha correta
-  return cliente.toJSON().password === senha ? 2 : 0;
+  return cliente.getPassword() === senha ? 2 : 0;
 }
 
 async function primeiroAcesso(cliente, clientes) {
-  console.log(`Bem vindo ${cliente.toJSON().nome}!
+  console.log(`Bem vindo ${cliente.getNome()}!
 Identificamos que este é o seu primeiro acesso!
-`);  
-  let novaSenha = String(prompt("Defina uma senha: "));
+`);
 
-  cliente.setSenhaNova(novaSenha); // ✅ agora funciona
+  let novaSenha;
+  do {
+    novaSenha = String(prompt("Defina uma senha: "));
+    if (!novaSenha) console.log("A senha não pode ser vazia.");
+  } while (!novaSenha);
 
-  // Salva todos os clientes novamente no JSON
+  cliente.setSenhaNova(novaSenha);
+
   fs.writeFileSync(
     arquivoCliente,
-    JSON.stringify(clientes.map(c => c.toJSON()), null, 2),
+    JSON.stringify(
+      clientes.map((c) => c.toJSON()),
+      null,
+      2
+    ),
     "utf8"
   );
   console.log("Senha definida com sucesso!\nFaça login novamente!");
