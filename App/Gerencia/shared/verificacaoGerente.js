@@ -1,4 +1,4 @@
-const { carregarGerente } = require("./arquivoGerente");
+const { carregarGerente } = require("../private/arquivoGerente");
 
 function verificaSeGerente(usuario, senha) {
   const gerentes = carregarGerente();

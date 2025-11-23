@@ -1,4 +1,4 @@
-const { Cliente } = require("../Cliente/Cliente");
+const { Cliente } = require("../../Cliente/private/Cliente");
 
 class Gerente {
   #coGerente;

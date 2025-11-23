@@ -1,10 +1,10 @@
-const prompt = require("prompt-sync")();
-const { verificarLogin } = require("./VerificarLogin");
-const { menuGerente } = require("../Gerencia/menuGerente");
-const { menuCliente } = require("../Cliente/menuCliente");
-const { Gerente } = require("../Gerencia/Gerente");
-const { Cliente } = require("../Cliente/Cliente");
+const { Gerente } = require("../Gerencia/private/Gerente");
+const { Cliente } = require("../Cliente/private/Cliente");
+const { menuGerente } = require("../Gerencia/shared/menuGerente");
+const { menuCliente } = require("../Cliente/shared/menuCliente");
 const { cabecalhoCentralizado } = require("../shared/personalizaPrompt");
+const { verificarLogin } = require("./VerificarLogin");
+const prompt = require("prompt-sync")();
 
 async function tela() {
   while (true) {

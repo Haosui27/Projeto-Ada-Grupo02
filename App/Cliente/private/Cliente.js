@@ -1,4 +1,4 @@
-const { Transacao } = require("../Transacao/Transacao");
+const { Transacao } = require("../../Transacao/Transacao");
 
 class Cliente {
   #cpf;
@@ -13,10 +13,10 @@ class Cliente {
     this.#cpf = cpf;
     this.#nome = nome;
     this.#saldo = saldo;
-    this.#password = password ?? this.#senhaPadrao;
-    this.#transacoes = transacoes;
+    this.#password = password ?? this.#senhaPadrao;    
+    this.#transacoes = Array.isArray(transacoes) ? transacoes : [];
     this.#coGerente = gerente;
-  }
+      }
 
   toJSON() {
     return {
@@ -24,17 +24,20 @@ class Cliente {
       nome: this.#nome,
       saldo: this.#saldo,
       password: this.#password,
-      transacoes: this.#transacoes,
+      transacoes: Array.isArray(this.#transacoes)
+      ? this.#transacoes.map(t => t.toJSON())
+      : [],
       gerente: this.#coGerente
     };
   }
 
   static fromJSON(obj) {
-    return new Cliente(obj.cpf, obj.nome, obj.saldo, obj.password, obj.transacoes, obj.gerente);
+    const transacoes = (obj.transacoes || []).map((t) => Transacao.fromJSON(t));
+    return new Cliente(obj.cpf, obj.nome, obj.saldo, obj.password, transacoes, obj.gerente);
   }
 
-  registrarTransacao(tipo, valor, destino = null) {
-    this.#transacoes.push(new Transacao(tipo, valor, destino, new Date()));
+  registrarTransacao(tipo, valor, destino = null, data) {
+    this.#transacoes.push(new Transacao(tipo, valor, destino, data));
   }
 
   getCpf() { return this.#cpf; }
@@ -42,6 +45,7 @@ class Cliente {
   getPassword() { return this.#password; }
   getSaldo() { return this.#saldo; }
   deposito(valor) { this.#saldo += valor; }
+  saque(valor) { this.#saldo -= valor; }
   setSenhaNova(senha) { this.#password = senha; }
   isPrimeiroAcesso() { return this.#password === null || this.#password === this.#senhaPadrao; }
 }

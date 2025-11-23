@@ -1,6 +1,6 @@
-const { cabecalhoCentralizado } = require("../shared/personalizaPrompt");
-const { cadastrarCliente } = require("./cadastrarCliente");
-const { listarClientes } = require("./listarClientes");
+const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
+const { cadastrarCliente } = require("../private/cadastrarCliente");
+const { listarClientes } = require("../private/listarClientes");
 
 const prompt = require("prompt-sync")();
 

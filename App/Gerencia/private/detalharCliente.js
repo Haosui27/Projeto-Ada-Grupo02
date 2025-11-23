@@ -1,7 +1,7 @@
-const { Cliente } = require("../Cliente/Cliente");
-const { cabecalhoCentralizado} = require('../shared/personalizaPrompt')
+const { Cliente } = require("../../Cliente/private/Cliente");
+const { cabecalhoCentralizado} = require('../../shared/personalizaPrompt')
 const { carregarClientes } = require("../Cliente/arquivoCliente");
-const { formatSaldo, formatCpf } = require("../shared/formats");
+const { formatSaldo, formatCpf } = require("../../shared/formats");
 
 async function detalharCliente() {
     cabecalhoCentralizado("Movimentação(ões) de Cliente");

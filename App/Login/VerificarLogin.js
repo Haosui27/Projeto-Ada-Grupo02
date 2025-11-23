@@ -1,5 +1,5 @@
-const { verificaSeCliente } = require("../Cliente/verificacaoCliente");
-const { verificaSeGerente } = require("../Gerencia/verificacaoGerente");
+const { verificaSeCliente } = require("../Cliente/shared/verificacaoCliente");
+const { verificaSeGerente } = require("../Gerencia/shared/verificacaoGerente");
 
 async function verificarLogin(usuario, senha) {
   try {

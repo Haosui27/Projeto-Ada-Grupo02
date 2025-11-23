@@ -35,7 +35,7 @@ function solicitarSaldo() {
     saldo = Number(prompt("Informe o Saldo Inicial: "));
 
     if (Number.isNaN(saldo) || saldo < 0) {
-      console.log("Saldo inicial inválido! Digite um número maior ou igual a zero.\n");
+      console.log("Valor inválido! Digite um número maior ou igual a zero.\n");
     }
   } while (Number.isNaN(saldo) || saldo < 0);
 

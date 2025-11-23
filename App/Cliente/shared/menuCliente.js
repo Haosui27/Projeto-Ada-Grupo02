@@ -1,8 +1,10 @@
-const { cabecalhoCentralizado } = require("../shared/personalizaPrompt");
+const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
+const { deposito } = require("../private/deposito");
+const { saque } = require("../private/saque");
 
 const prompt = require("prompt-sync")();
 
-function menuCliente(clienteAtivo) {
+async function menuCliente(clienteAtivo) {
   do {
     cabecalhoCentralizado("MENU CLIENTES")
     console.log(` 1 - Consultar saldo atual\n 2 - Realizar depósitos\n 3 - Efetuar saques\n 4 - Fazer transferências\n 5 - Visualizar extrato\n 0 - Sair\n`);
@@ -14,10 +16,10 @@ function menuCliente(clienteAtivo) {
         console.log("Em manutenção. Consultar saldo atual");
         break;
       case "2":
-        console.log("Em manutenção. Realizar depósitos");
+        await deposito(clienteAtivo);
         break;
       case "3":
-        console.log("Em manutenção. Efetuar saques");
+        await saque(clienteAtivo);
         break;
       case "4":
         console.log("Em manutenção. Fazer transferência");

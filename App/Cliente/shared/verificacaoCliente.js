@@ -1,4 +1,4 @@
-const { carregarClientes, arquivoCliente } = require("./arquivoCliente");
+const { carregarClientes, arquivoCliente } = require("../private/arquivoCliente");
 const fs = require("fs").promises;
 const prompt = require("prompt-sync")();
 
@@ -26,7 +26,7 @@ async function primeiroAcesso(cliente, clientes) {
   console.log(`Bem vindo ${cliente.getNome()}! Este é seu primeiro acesso.`);
   let novaSenha;
   do {
-    novaSenha = String(prompt("Defina uma senha: "));
+    novaSenha = String(prompt("Defina uma senha: ", { echo: "*" }));
   } while (!novaSenha);
 
   cliente.setSenhaNova(novaSenha);
@@ -37,6 +37,7 @@ async function primeiroAcesso(cliente, clientes) {
     "utf8"
   );
 
+  console.clear();
   console.log("Senha definida com sucesso! Faça login novamente.");
 }
 
