@@ -1,6 +1,8 @@
+const { cadastrarCliente } = require("./cadastrarCliente");
+
 const prompt = require("prompt-sync")();
 
-function menuGerente() {
+async function menuGerente(gerenteAtivo) {
   do {
     console.log(`
                 ===== MENU GERENTE =====
@@ -14,7 +16,8 @@ function menuGerente() {
 
     switch (menu) {
       case "1":
-        console.log("Em manutenção. Cadastrar clientes");
+        //console.log("Em manutenção. Cadastrar clientes");
+        await cadastrarCliente(gerenteAtivo);
         break;
       case "2":
         console.log("Em manutenção. Listar clientes");

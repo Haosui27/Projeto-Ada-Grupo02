@@ -1,7 +1,9 @@
 const prompt = require("prompt-sync")();
 const { verificarLogin } = require("./VerificarLogin");
-const { menuGerente } = require("../Gerente/menuGerente");
+const { menuGerente } = require("../Gerencia/menuGerente");
 const { menuCliente } = require("../Cliente/menuCliente");
+const { Gerente } = require("../Gerencia/Gerente");
+const { Cliente } = require("../Cliente/Cliente");
 
 async function tela() {
   while (true) {
@@ -12,28 +14,21 @@ async function tela() {
     `);
 
     const usuario = prompt("Login: ");
-    const senha = prompt("Senha: ");
-    const validacao = await verificarLogin(usuario, senha);
+    const senha = prompt("Senha: ", { echo: "*" });
+    const usuarioAtivo = await verificarLogin(usuario, senha);
 
-    switch (validacao) {
-      case 1:
-        // Mostra menu gerente
-        menuGerente();
-        break; // sai do loop
-      case 2:
-        // Mostra menu cliente
-        menuCliente();
-        break; // sai do loop
-      case 3:
-        // Primeiro acesso concluído -> apenas continue sem mensagem de erro
-        continue;
-      default:
-        console.log("Usuário inválido! Tente novamente.\n");
-        continue; // volta para pedir login de novo
+    if (!usuarioAtivo) {
+      console.log("Usuário inválido! Tente novamente.\n");
+      continue;
     }
 
-    // Se chegou aqui, login foi válido → encerra loop
-    break;
+    if (usuarioAtivo instanceof Gerente) {
+      menuGerente(usuarioAtivo);
+    } else if (usuarioAtivo instanceof Cliente) {
+      menuCliente(usuarioAtivo);
+    }
+
+    break; // login válido → encerra loop
   }
 }
 

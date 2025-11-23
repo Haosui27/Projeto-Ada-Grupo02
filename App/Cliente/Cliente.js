@@ -1,3 +1,4 @@
+// Cliente.js
 class Cliente {
   #cpf;
   #nome;
@@ -5,16 +6,17 @@ class Cliente {
   #password;
   #transacoes;
   #senhaPadrao = "1234";
+  #coGerente;
 
-  constructor(cpf, nome, saldo, password = null, transacoes = []) {
+  constructor(cpf, nome, saldo, password = null, transacoes = [], gerente) {
     this.#cpf = cpf;
     this.#nome = nome;
     this.#saldo = saldo;
     this.#password = password ?? this.#senhaPadrao;
     this.#transacoes = transacoes;
+    this.#coGerente = gerente;
   }
 
-  // Método para gravar objetos no arquivo JSON
   toJSON() {
     return {
       cpf: this.#cpf,
@@ -22,44 +24,25 @@ class Cliente {
       saldo: this.#saldo,
       password: this.#password,
       transacoes: this.#transacoes,
+      gerente: this.#coGerente
     };
   }
 
-  // Método para construir instanciar objetos a partir do JSON
   static fromJSON(obj) {
-    return new Cliente(obj.cpf, obj.nome, obj.saldo, obj.password, obj.transacoes);
+    return new Cliente(obj.cpf, obj.nome, obj.saldo, obj.password, obj.transacoes, obj.gerente);
   }
 
-  // Método pra registro de transações
   registrarTransacao(tipo, valor, destino = null) {
-    this.#transacoes.push({
-      tipo,
-      valor,
-      destino,
-      data: new Date(),
-    });
+    this.#transacoes.push({ tipo, valor, destino, data: new Date() });
   }
 
-  getCpf(){
-    return this.#cpf;
-  }
-
-  getNome(){
-    return this.#nome;
-  }
-
-  getPassword(){
-    return this.#password;
-  }
-
-  // Método para atribuir nova senha
-  setSenhaNova(senha) {
-    this.#password = senha;
-  }
-
-  isPrimeiroAcesso(){
-    return this.#password === null || this.#password === this.#senhaPadrao;
-  }
+  getCpf() { return this.#cpf; }
+  getNome() { return this.#nome; }
+  getPassword() { return this.#password; }
+  getSaldo() { return this.#saldo; }
+  deposito(valor) { this.#saldo += valor; }
+  setSenhaNova(senha) { this.#password = senha; }
+  isPrimeiroAcesso() { return this.#password === null || this.#password === this.#senhaPadrao; }
 }
 
 module.exports = { Cliente };

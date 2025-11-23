@@ -1,8 +1,17 @@
 [
   {
     "cpf": "12345678910",
-    "nome": "Kaio",
-    "password": "6969",
-    "transacoes": []
+    "nome": "Kaio Ramos",
+    "saldo": 1000,
+    "password": "1234",
+    "transacoes": [
+      {
+        "tipo": "cadastro",
+        "valor": 1000,
+        "destino": null,
+        "data": "2025-11-23T12:26:00.685Z"
+      }
+    ],
+    "gerente": "G01"
   }
 ]

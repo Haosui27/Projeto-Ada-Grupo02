@@ -1,16 +1,16 @@
 [
     {
-        "id": "G01",
+        "coGerente": "G01",
         "nome": "Matheus da Silva Rodrigues",
         "password": "1234"
     },
     {
-        "id": "G02",
+        "coGerente": "G02",
         "nome": "Adriana Vieira",
         "password": "5678"
     },
     {
-        "id": "G03",
+        "coGerente": "G03",
         "nome": "Adriana Vieira",
         "password": "9123"
     }
