@@ -2,7 +2,7 @@
   {
     "cpf": "12345678910",
     "nome": "Kaio Ramos",
-    "saldo": 100,
+    "saldo": 310,
     "password": "6969",
     "transacoes": [
       {
@@ -22,6 +22,99 @@
         "valor": 100,
         "destino": null,
         "data": "2025-11-23T18:39:42-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 100,
+        "destino": null,
+        "data": "2025-11-23T19:22:08-03:00"
+      },
+      {
+        "coTransacao": "Saque",
+        "valor": 100,
+        "destino": null,
+        "data": "2025-11-23T19:22:36-03:00"
+      },
+      {
+        "coTransacao": "Destino Transferencia",
+        "valor": 100,
+        "destino": "11122233344",
+        "data": "2025-11-23T20:32:11-03:00"
+      },
+      {
+        "coTransacao": "Destino Transferencia",
+        "valor": 110,
+        "destino": "11122233344",
+        "data": "2025-11-23T20:45:43-03:00"
+      }
+    ],
+    "gerente": "G01"
+  },
+  {
+    "cpf": "11122233344",
+    "nome": "Laura Ross",
+    "saldo": 1400,
+    "password": "2233",
+    "transacoes": [
+      {
+        "coTransacao": "Abertura de Conta",
+        "valor": 1000,
+        "destino": null,
+        "data": "2025-11-23T20:00:07-03:00"
+      },
+      {
+        "coTransacao": "Origem Transferencia",
+        "valor": 100,
+        "destino": "12345678910",
+        "data": "2025-11-23T20:32:11-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 100,
+        "destino": null,
+        "data": "2025-11-23T20:33:45-03:00"
+      },
+      {
+        "coTransacao": "Saque",
+        "valor": 50,
+        "destino": null,
+        "data": "2025-11-23T20:34:10-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 10,
+        "destino": null,
+        "data": "2025-11-23T20:37:22-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 100,
+        "destino": null,
+        "data": "2025-11-23T20:39:05-03:00"
+      },
+      {
+        "coTransacao": "Saque",
+        "valor": 50,
+        "destino": null,
+        "data": "2025-11-23T20:39:10-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 1000,
+        "destino": null,
+        "data": "2025-11-23T20:45:16-03:00"
+      },
+      {
+        "coTransacao": "Saque",
+        "valor": 500,
+        "destino": null,
+        "data": "2025-11-23T20:45:25-03:00"
+      },
+      {
+        "coTransacao": "Origem Transferencia",
+        "valor": 110,
+        "destino": "12345678910",
+        "data": "2025-11-23T20:45:43-03:00"
       }
     ],
     "gerente": "G01"

@@ -1,5 +1,6 @@
 const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
 const { cadastrarCliente } = require("../private/cadastrarCliente");
+const { extratoG } = require("../private/extratoCliente");
 const { listarClientes } = require("../private/listarClientes");
 
 const prompt = require("prompt-sync")();
@@ -22,7 +23,7 @@ async function menuGerente(gerenteAtivo) {
         break;
       case "3":
         console.clear();
-        console.log("Em manutenção.Detalhar clientes");
+        await extratoG();
         break;
       case "0":
         console.clear();

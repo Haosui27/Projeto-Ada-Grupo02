@@ -11,10 +11,6 @@ function formatCpf(obj) {
   return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
 
-function formatTransacao(obj) {
-  return;
-}
-
 function formatData() {
   const agora = new Date();
   const dataBrasilia = agora.toLocaleString("pt-BR", {

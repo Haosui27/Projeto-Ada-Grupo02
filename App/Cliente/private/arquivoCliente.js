@@ -65,7 +65,7 @@ async function atualizarCliente(cliente, novaTransacao) {
       clientes[index].transacoes = [];
     }
 
-    // Usa diretamente a transação recebida
+    // Grava a transação recebida
     clientes[index].transacoes.push(novaTransacao.toJSON());
 
     // Salva de volta no arquivo

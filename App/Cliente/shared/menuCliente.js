@@ -1,6 +1,9 @@
+const { formatSaldo } = require("../../shared/formats");
 const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
 const { deposito } = require("../private/deposito");
+const { extratoPorCpf } = require("../private/extrato");
 const { saque } = require("../private/saque");
+const { transferencia } = require("../private/transferencia");
 
 const prompt = require("prompt-sync")();
 
@@ -13,7 +16,8 @@ async function menuCliente(clienteAtivo) {
 
     switch (menu) {
       case "1":
-        console.log("Em manutenção. Consultar saldo atual");
+        cabecalhoCentralizado("SALDO");
+        console.log(`Saldo atual: ${formatSaldo(clienteAtivo.getSaldo())}`);
         break;
       case "2":
         await deposito(clienteAtivo);
@@ -22,13 +26,14 @@ async function menuCliente(clienteAtivo) {
         await saque(clienteAtivo);
         break;
       case "4":
-        console.log("Em manutenção. Fazer transferência");
+        await transferencia(clienteAtivo)
         break;
       case "5":
-        console.log("Em manutenção. Visualizar extrato");
+        await extratoPorCpf(clienteAtivo.getCpf())
         break;
       case "0":
-        console.log("Saindo do Sistema. Volte Sempre!");
+        console.clear();
+        console.log("Saindo do Sistema. Volte Sempre!");        
         break;
       default:
         console.log("Opção Inválida. Tente novamente!");

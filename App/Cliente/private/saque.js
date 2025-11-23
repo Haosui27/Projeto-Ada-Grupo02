@@ -5,7 +5,6 @@ const { atualizarCliente } = require("../private/arquivoCliente");
 const prompt = require("prompt-sync")();
 
 async function saque(cliente) {
-  console.clear();
   cabecalhoCentralizado("REALIZAR SAQUE");
 
   const valor = parseFloat(prompt("Valor do saque: "));
@@ -21,7 +20,6 @@ async function saque(cliente) {
     console.log("Valor inválido.");
   }
 
-  console.clear();
 }
 
 module.exports = { saque };

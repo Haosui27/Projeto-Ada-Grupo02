@@ -32,7 +32,7 @@ function solicitarSaldo() {
   let saldo;
 
   do {
-    saldo = Number(prompt("Informe o Saldo Inicial: "));
+    saldo = Number(prompt("Informe o valor (R$): "));
 
     if (Number.isNaN(saldo) || saldo < 0) {
       console.log("Valor inválido! Digite um número maior ou igual a zero.\n");

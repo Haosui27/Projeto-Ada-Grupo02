@@ -5,7 +5,6 @@ const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
 const prompt = require("prompt-sync")();
 
 async function deposito(cliente) {
-  console.clear();
   cabecalhoCentralizado("REALIZAR DEPOSITO");
 
   const valor = parseFloat(prompt("Valor do depósito: "));
@@ -21,7 +20,6 @@ async function deposito(cliente) {
     console.log("Valor inválido.");
   }
 
-  console.clear();
 }
 
 module.exports = { deposito };
