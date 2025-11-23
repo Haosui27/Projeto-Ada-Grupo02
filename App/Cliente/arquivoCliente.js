@@ -1,4 +1,3 @@
-// arquivoCliente.js
 const { Cliente } = require("./Cliente");
 const fs = require("fs").promises;
 const path = require("path");
@@ -13,9 +12,16 @@ async function salvarCliente(cliente) {
       const dados = await fs.readFile(arquivoCliente, "utf8");
       clientes = JSON.parse(dados);
     } catch {
-      // arquivo não existe ou está vazio → começa lista vazia
+      // arquivo não existe ou está vazio
     }
 
+    //Verifica se já existe cliente com o mesmo CPF
+    const jaExiste = clientes.some(c => c.cpf === cliente.getCpf());
+    if (jaExiste) {
+      console.log(`Cliente com CPF ${cliente.getCpf()} já está cadastrado!`);
+      return;
+    }
+    
     clientes.push(cliente.toJSON());
     await fs.writeFile(arquivoCliente, JSON.stringify(clientes, null, 2), "utf8");
     console.log("Cliente cadastrado com sucesso!");
@@ -24,7 +30,7 @@ async function salvarCliente(cliente) {
   }
 }
 
-// Função para carregar clientes do JSON e transformar em instâncias da classe Cliente
+// Função para carregar clientes do JSON
 async function carregarClientes() {
   try {
     const dados = await fs.readFile(arquivoCliente, "utf8");
@@ -32,7 +38,7 @@ async function carregarClientes() {
     const lista = JSON.parse(dados);
     return lista.map(obj => Cliente.fromJSON(obj));
   } catch {
-    return []; // se arquivo não existir ou erro de leitura
+    return []; // se o arquivo não existir ou der erro de leitura
   }
 }
 

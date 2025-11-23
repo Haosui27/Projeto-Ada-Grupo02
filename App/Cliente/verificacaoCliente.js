@@ -9,7 +9,10 @@ async function verificaSeCliente(usuario, senha) {
   const clientes = await carregarClientes();
   const cliente = clientes.find(c => c.getCpf() === usuario);
 
-  if (!cliente) return null;
+  if (!cliente){
+    console.log("Usuário inválido! Tente novamente.\n");    
+    return null;
+  } 
 
   if (cliente.isPrimeiroAcesso()) {
     await primeiroAcesso(cliente, clientes);

@@ -1,7 +1,5 @@
 const { Cliente } = require('./Cliente');
 
-
-
 function deposito(cliente) {
 
     const valor = parseFloat(prompt('Valor do depósito: '));
@@ -13,3 +11,5 @@ function deposito(cliente) {
         console.log('Valor inválido.')
     }
 }
+
+module.exports = { deposito };

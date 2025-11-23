@@ -5,7 +5,13 @@ function verificaSeGerente(usuario, senha) {
   const gerente = gerentes.find(
     g => g.getId() === usuario && g.getPassword() === senha
   );
-  return gerente || null;
+
+  if(!gerente){
+    console.log("Usuário inválido! Tente novamente.\n");
+    return null
+  }
+
+  return gerente;
 }
 
 module.exports = { verificaSeGerente };

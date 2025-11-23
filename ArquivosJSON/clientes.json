@@ -4,14 +4,12 @@
     "nome": "Kaio Ramos",
     "saldo": 1000,
     "password": "1234",
-    "transacoes": [
-      {
-        "tipo": "cadastro",
-        "valor": 1000,
-        "destino": null,
-        "data": "2025-11-23T12:26:00.685Z"
-      }
-    ],
+    "transacoes": {
+      "coTransacao": 1,
+      "valor": 1000,
+      "destino": null,
+      "data": "2025-11-23T17:30:25.251Z"
+    },
     "gerente": "G01"
   }
 ]

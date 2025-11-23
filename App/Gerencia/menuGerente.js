@@ -1,34 +1,35 @@
+const { cabecalhoCentralizado } = require("../shared/personalizaPrompt");
 const { cadastrarCliente } = require("./cadastrarCliente");
+const { listarClientes } = require("./listarClientes");
 
 const prompt = require("prompt-sync")();
 
 async function menuGerente(gerenteAtivo) {
   do {
-    console.log(`
-                ===== MENU GERENTE =====
-                1 - Cadastrar clientes
-                2 - Listar clientes 
-                3 - Detalhar clientes
-                0 - Sair 
-            `);
+    cabecalhoCentralizado("MENU GERENTE");
+    console.log(" 1 - Cadastrar clientes\n 2 - Listar clientes\n 3 - Detalhar clientes\n 0 - Sair\n");
 
     menu = prompt("Digite a opção desejada: ");
 
     switch (menu) {
       case "1":
-        //console.log("Em manutenção. Cadastrar clientes");
+        console.clear();
         await cadastrarCliente(gerenteAtivo);
         break;
       case "2":
-        console.log("Em manutenção. Listar clientes");
+        console.clear();
+        await listarClientes();
         break;
       case "3":
+        console.clear();
         console.log("Em manutenção.Detalhar clientes");
         break;
       case "0":
+        console.clear();
         console.log("Saindo do Sistema. Volte Sempre!");
         break;
       default:
+        console.clear();
         console.log("Opção Inválida. Tente novamente!");
         break;
     }

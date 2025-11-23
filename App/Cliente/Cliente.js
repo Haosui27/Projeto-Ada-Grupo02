@@ -1,4 +1,5 @@
-// Cliente.js
+const { Transacao } = require("../Transacao/Transacao");
+
 class Cliente {
   #cpf;
   #nome;
@@ -33,7 +34,7 @@ class Cliente {
   }
 
   registrarTransacao(tipo, valor, destino = null) {
-    this.#transacoes.push({ tipo, valor, destino, data: new Date() });
+    this.#transacoes.push(new Transacao(tipo, valor, destino, new Date()));
   }
 
   getCpf() { return this.#cpf; }

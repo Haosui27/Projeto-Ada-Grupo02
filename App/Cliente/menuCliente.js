@@ -1,16 +1,11 @@
+const { cabecalhoCentralizado } = require("../shared/personalizaPrompt");
+
 const prompt = require("prompt-sync")();
 
-function menuCliente() {
+function menuCliente(clienteAtivo) {
   do {
-    console.log(`
-                ===== MENU CLIENTES =====
-                1 - Consultar saldo atual
-                2 - Realizar depósitos
-                3 - Efetuar saques
-                4 - Fazer transferências
-                5 - Visualizar extrato
-                0 - Sair 
-            `);
+    cabecalhoCentralizado("MENU CLIENTES")
+    console.log(` 1 - Consultar saldo atual\n 2 - Realizar depósitos\n 3 - Efetuar saques\n 4 - Fazer transferências\n 5 - Visualizar extrato\n 0 - Sair\n`);
 
     menu = prompt("Digite a opção desejada: ");
 
@@ -40,4 +35,4 @@ function menuCliente() {
   } while (menu !== "0"); //deixei assim para que retorne para o menu até acertar a opção ou digita 0 pra sair
 }
 
-module.exports = {menuCliente};
+module.exports = { menuCliente };
