@@ -28,7 +28,7 @@ class Transacao {
   }
 
   toJSON() {
-    // Formata para ISO no fuso de Brasília
+    // Formata para o padrão AAAA/MM/DD mas ajusta para o horário de Brasília
     const formatter = new Intl.DateTimeFormat("sv-SE", {
       timeZone: "America/Sao_Paulo",
       year: "numeric",

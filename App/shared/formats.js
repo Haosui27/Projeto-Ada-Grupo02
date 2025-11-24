@@ -11,12 +11,16 @@ function formatCpf(obj) {
   return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
 
-function formatData() {
-  const agora = new Date();
-  const dataBrasilia = agora.toLocaleString("pt-BR", {
+function formatData(dataRecebida) {
+  // Recebe a data gravada no arquivo clientes.json
+  const data = new Date(dataRecebida);
+
+  // Estiliza para o padrão DD/MM/AAAA e ajusta para o horário de Brasília
+  const dataBrasilia = data.toLocaleString("pt-BR", {
     timeZone: "America/Sao_Paulo",
   });
-  console.log(dataBrasilia);
+
+  return dataBrasilia;
 }
 
 module.exports = { formatSaldo, formatCpf, formatData };
