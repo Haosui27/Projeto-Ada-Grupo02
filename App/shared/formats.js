@@ -23,4 +23,12 @@ function formatData(dataRecebida) {
   return dataBrasilia;
 }
 
-module.exports = { formatSaldo, formatCpf, formatData };
+function salvarData() {
+  const agora = new Date();
+  const dataBrasilia = agora.toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+  });
+  console.log(dataBrasilia);
+}
+
+module.exports = { formatSaldo, formatCpf, formatData, salvarData };

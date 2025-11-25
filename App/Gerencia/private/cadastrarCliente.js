@@ -8,7 +8,7 @@ const {
   solicitarSaldo,
 } = require("../../shared/entradas");
 const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
-const { formatData } = require("../../shared/formats");
+const { salvarData } = require("../../shared/formats");
 
 async function cadastrarCliente(gerenteAtivo) {
   cabecalhoCentralizado("CADASTRAR CLIENTE");
@@ -21,7 +21,7 @@ async function cadastrarCliente(gerenteAtivo) {
 
   // usa o método que usa a instância do Gerente logado
   const idGerente = gerenteAtivo.getId();
-  const data = formatData();
+  const data = salvarData();
   const transacao = new Transacao(
     "Abertura de Conta",
     saldoInicial,
