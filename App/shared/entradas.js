@@ -1,10 +1,10 @@
 const prompt = require("prompt-sync")();
 
-function solicitarCPF() {
+function solicitarCPF(mensagem) {
   let cpf;
 
   do {
-    cpf = String(prompt("Informe o CPF (11 dígitos): ").replace(/\D/g, "")); // remove caracteres não numéricos
+    cpf = String(prompt(mensagem).replace(/\D/g, "")); // remove caracteres não numéricos
 
     if (!cpf || cpf.length !== 11) {
       console.log("CPF inválido! Tente novamente.\n");

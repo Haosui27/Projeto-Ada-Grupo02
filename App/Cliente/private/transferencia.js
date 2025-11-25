@@ -5,7 +5,7 @@ const { carregarClientes, atualizarCliente } = require("./arquivoCliente");
 async function transferencia(cliente) {
   const listaClientes = await carregarClientes();
 
-  let cpf = solicitarCPF();
+  let cpf = solicitarCPF("Informe o cpf do destinatário: ");
   let valor = solicitarSaldo();
 
   const clienteDestino = listaClientes.find((c) => c.getCpf() === cpf);

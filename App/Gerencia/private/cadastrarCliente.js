@@ -13,7 +13,7 @@ const { salvarData } = require("../../shared/formats");
 async function cadastrarCliente(gerenteAtivo) {
   cabecalhoCentralizado("CADASTRAR CLIENTE");
 
-  let cpf = solicitarCPF();
+  let cpf = solicitarCPF("Informe o CPF (11 dígitos): ");
 
   let nome = solicitarNome();
 

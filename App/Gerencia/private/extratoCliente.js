@@ -5,7 +5,7 @@ const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
 async function extratoG(){
     cabecalhoCentralizado("Movimentação Cliente");
 
-    let cpfCliente = solicitarCPF();
+    let cpfCliente = solicitarCPF("Informe o CPF do Cliente Desejado: ");
 
     await extratoPorCpf(cpfCliente);
 }

@@ -13,7 +13,7 @@ async function listarClientes() {
         let saldo = formatSaldo(cliente.getSaldo());
         let cpf = formatCpf(cliente.getCpf())
 
-        console.log(`${cpf} - ${cliente.getNome()} - Saldo: R$ ${saldo}`);       
+        console.log(`${cpf} - ${cliente.getNome()} - Saldo: ${saldo}`);  
     });
 }
 
