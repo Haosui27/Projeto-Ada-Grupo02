@@ -1,7 +1,7 @@
 const { Cliente } = require("./Cliente");
 const { cabecalhoCentralizado } = require("../../shared/personalizaPrompt");
 const { carregarClientes } = require("../private/arquivoCliente");
-const { formatData } = require("../../shared/formats");
+const { formatData, formatSaldo } = require("../../shared/formats");
 
 // Função que recebe um JSON (array de clientes) e um CPF
 async function extratoPorCpf(cpf) {
@@ -24,12 +24,12 @@ async function extratoPorCpf(cpf) {
   } else {
     transacoes.forEach((t, index) => {
       console.log(
-        `${index + 1}. ${t.coTransacao} | Valor: R$ ${t.valor} | Destino: ${t.destino ?? "-"} | Data: ${formatData(t.data)}`
+        `${index + 1}. ${t.coTransacao} | Valor: ${formatSaldo(t.valor)} | Destino: ${t.destino ?? "-"} | Data: ${formatData(t.data)}`
       );
     });
   }
 
-  console.log(`Saldo atual: R$ ${cliente.getSaldo()}`);
+  console.log(`Saldo atual: ${formatSaldo(cliente.getSaldo())}`);
 
   return cliente;
 }

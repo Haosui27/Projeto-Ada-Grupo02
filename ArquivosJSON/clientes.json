@@ -2,7 +2,7 @@
   {
     "cpf": "12345678910",
     "nome": "Kaio Ramos",
-    "saldo": 1000,
+    "saldo": 950,
     "password": "2233",
     "transacoes": [
       {
@@ -10,6 +10,69 @@
         "valor": 1000,
         "destino": null,
         "data": "2025-11-24T21:48:53-03:00"
+      },
+      {
+        "coTransacao": "Destino Transferencia",
+        "valor": 150,
+        "destino": "11122233344",
+        "data": "2025-11-26T18:25:13-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 100,
+        "destino": null,
+        "data": "2025-11-26T18:26:44-03:00"
+      },
+      {
+        "coTransacao": "Saque",
+        "valor": 200,
+        "destino": null,
+        "data": "2025-11-26T18:26:52-03:00"
+      },
+      {
+        "coTransacao": "Origem Transferencia",
+        "valor": 100,
+        "destino": "11122233344",
+        "data": "2025-11-26T18:27:04-03:00"
+      }
+    ],
+    "gerente": "G01"
+  },
+  {
+    "cpf": "11122233344",
+    "nome": "Larissa Keller",
+    "saldo": 2000,
+    "password": "5989",
+    "transacoes": [
+      {
+        "coTransacao": "Abertura de Conta",
+        "valor": 2000,
+        "destino": null,
+        "data": "2025-11-26T18:20:03-03:00"
+      },
+      {
+        "coTransacao": "Deposito",
+        "valor": 100,
+        "destino": null,
+        "data": "2025-11-26T18:24:51-03:00"
+      },
+      {
+        "coTransacao": "Saque",
+        "valor": 50,
+        "destino": null,
+        "data": "2025-11-26T18:24:56-03:00"
+      },
+      {
+        "coTransacao": "Origem Transferencia",
+        "valor": 150,
+        "destino": "12345678910",
+        "data": "2025-11-26T18:25:13-03:00"
+      },
+      {
+        "coTransacao": "Destino Transferencia",
+        "valor": 100,
+        "destino": "12345678910",
+        "data": "2025-11-26T18:27:04-03:00"
       }
     ],
     "gerente": "G01"

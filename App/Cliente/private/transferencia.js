@@ -1,4 +1,5 @@
 const { solicitarCPF, solicitarSaldo } = require("../../shared/entradas");
+const { formatSaldo } = require("../../shared/formats");
 const { Transacao } = require("../../Transacao/Transacao");
 const { carregarClientes, atualizarCliente } = require("./arquivoCliente");
 
@@ -50,7 +51,7 @@ async function transferencia(cliente) {
   await atualizarCliente(clienteDestino, destinoTransacao);
 
   console.log(
-    `Transferência de R$ ${valor} realizada com sucesso para ${clienteDestino.getNome()}.`
+    `Transferência de ${formatSaldo(valor)} realizada com sucesso para ${clienteDestino.getNome()}.`
   );
 }
 
